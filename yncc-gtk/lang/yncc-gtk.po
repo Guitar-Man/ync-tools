@@ -1,0 +1,236 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: yncc-gtk\n"
+"POT-Creation-Date: 2018-02-03 19:16+0100\n"
+"PO-Revision-Date: 2018-02-03 19:27+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: check_EnableMACFilter_clicked\n"
+"X-Poedit-SearchPath-0: yncc_gtk_window.cpp\n"
+"X-Poedit-SearchPath-1: res/yncc-gtk.glade\n"
+
+#: res/yncc-gtk.glade:62 res/yncc-gtk.glade:175 res/yncc-gtk.glade:288
+#: res/yncc-gtk.glade:401 res/yncc-gtk.glade:514 res/yncc-gtk.glade:627
+#: res/yncc-gtk.glade:739
+msgid "---"
+msgstr "---"
+
+#: res/yncc-gtk.glade:75 res/yncc-gtk.glade:188 res/yncc-gtk.glade:301
+#: res/yncc-gtk.glade:414 res/yncc-gtk.glade:527 res/yncc-gtk.glade:640
+#: res/yncc-gtk.glade:752
+msgid "Auto connect"
+msgstr "Connexion automatique"
+
+#: res/yncc-gtk.glade:117 res/yncc-gtk.glade:230 res/yncc-gtk.glade:343
+#: res/yncc-gtk.glade:456 res/yncc-gtk.glade:569 res/yncc-gtk.glade:682
+#: res/yncc-gtk.glade:794
+msgid "Remember"
+msgstr "Mémoriser"
+
+#: res/yncc-gtk.glade:867
+msgid "Devices"
+msgstr "Périphériques"
+
+#: res/yncc-gtk.glade:896
+msgid "Server"
+msgstr "Serveur"
+
+#: res/yncc-gtk.glade:911
+msgid "CD"
+msgstr "CD"
+
+#: res/yncc-gtk.glade:926
+msgid "Net Radios"
+msgstr "Web Radios"
+
+#: res/yncc-gtk.glade:941
+msgid "AirPlay"
+msgstr "AirPlay"
+
+#: res/yncc-gtk.glade:956
+msgid "Spotify"
+msgstr "Spotify"
+
+#: res/yncc-gtk.glade:980
+msgid "Source"
+msgstr "Source"
+
+#: res/yncc-gtk.glade:1495
+msgid "List"
+msgstr "Liste"
+
+#: res/yncc-gtk.glade:1523 res/yncc-gtk.glade:2169
+msgid "Title"
+msgstr "Titre"
+
+#: res/yncc-gtk.glade:1538
+msgid "Artist"
+msgstr "Artiste"
+
+#: res/yncc-gtk.glade:1553 res/yncc-gtk.glade:1854
+msgid "00 : 00"
+msgstr "00 : 00"
+
+#: res/yncc-gtk.glade:1596 res/yncc-gtk.glade:1912
+msgid "Shuffle : "
+msgstr "Aléatoire : "
+
+#: res/yncc-gtk.glade:1640 res/yncc-gtk.glade:1956
+msgid "Repeat : "
+msgstr "Répéter : "
+
+#: res/yncc-gtk.glade:1769 res/yncc-gtk.glade:2126 res/yncc-gtk.glade:2206
+msgid "Player"
+msgstr "Lecteur"
+
+#: res/yncc-gtk.glade:1815
+msgid "Track"
+msgstr "Piste"
+
+#: res/yncc-gtk.glade:1832
+msgid "00 / 00"
+msgstr "00 / 00"
+
+#: res/yncc-gtk.glade:2153
+msgid "Listen"
+msgstr "Ecouter"
+
+#: res/yncc-gtk.glade:2185
+msgid "Station"
+msgstr "Station"
+
+#: res/yncc-gtk.glade:2255
+msgid "Model"
+msgstr "Modèle"
+
+#: res/yncc-gtk.glade:2268
+msgid "System ID"
+msgstr "Système ID"
+
+#: res/yncc-gtk.glade:2281
+msgid "Version"
+msgstr "Version"
+
+#: res/yncc-gtk.glade:2294
+msgid "Features"
+msgstr "Fonctions"
+
+#: res/yncc-gtk.glade:2319 res/yncc-gtk.glade:2331 res/yncc-gtk.glade:2343
+#: res/yncc-gtk.glade:2355
+msgid ":"
+msgstr ":"
+
+#: res/yncc-gtk.glade:2470
+msgid "Yncc-Gtk "
+msgstr "Yncc-Gtk "
+
+#: res/yncc-gtk.glade:2482 res/yncc-gtk.glade:2507 res/yncc-gtk.glade:3230
+#: res/yncc-gtk.glade:3243 res/yncc-gtk.glade:3256 res/yncc-gtk.glade:3269
+#: res/yncc-gtk.glade:3282 res/yncc-gtk.glade:3295
+msgid "label"
+msgstr "label"
+
+#: res/yncc-gtk.glade:2495
+msgid "(API "
+msgstr "(API "
+
+#: res/yncc-gtk.glade:2519
+msgid ")"
+msgstr ")"
+
+#: res/yncc-gtk.glade:2542
+msgid ""
+"Yncc-Gtk is released under licence GNU GPLv3.\n"
+"Copyright (C) 2018 - Alexandre Courtois"
+msgstr ""
+"Yncc-Gtk est distribué sous licence GNU GPLv3.\n"
+"Copyright (C) 2018 - Alexandre Courtois"
+
+#: res/yncc-gtk.glade:2558
+msgid "Licence"
+msgstr "Licence"
+
+#: res/yncc-gtk.glade:2571
+msgid "button"
+msgstr "button"
+
+#: res/yncc-gtk.glade:2671
+msgid "Network name"
+msgstr "Nom réseau"
+
+#: res/yncc-gtk.glade:2949
+msgid "Add this computer"
+msgstr "Ajouter cet ordinateur"
+
+#: res/yncc-gtk.glade:2966
+msgid "Enable MAC address filtering"
+msgstr "Activer le filtrage par adresses MAC"
+
+#: res/yncc-gtk.glade:2989
+msgid "MAC filters"
+msgstr "Filtrage MAC"
+
+#: res/yncc-gtk.glade:3013
+msgid "IP address"
+msgstr "Adresse IP"
+
+#: res/yncc-gtk.glade:3027
+msgid "Subnet mask"
+msgstr "Sous-réseau"
+
+#: res/yncc-gtk.glade:3041
+msgid "Default gateway"
+msgstr "Passerelle"
+
+#: res/yncc-gtk.glade:3055
+msgid "DNS Server 1"
+msgstr "Serveur DNS 1"
+
+#: res/yncc-gtk.glade:3069
+msgid "DNS Server 2"
+msgstr "Serveur DNS 2"
+
+#: res/yncc-gtk.glade:3083
+msgid "MAC address"
+msgstr "Adresse MAC"
+
+#: res/yncc-gtk.glade:3110 res/yncc-gtk.glade:3124 res/yncc-gtk.glade:3139
+#: res/yncc-gtk.glade:3154 res/yncc-gtk.glade:3169
+msgid " : "
+msgstr " : "
+
+#: res/yncc-gtk.glade:3321
+msgid "Informations"
+msgstr "Informations"
+
+#: res/yncc-gtk.glade:3345
+msgid "Settings"
+msgstr "Réglages"
+
+#: res/yncc-gtk.glade:3366
+msgid "Power On"
+msgstr "Power On"
+
+#: res/yncc-gtk.glade:3379
+msgid "Pure Direct"
+msgstr "Pure Direct"
+
+#: res/yncc-gtk.glade:3392
+msgid "Eject"
+msgstr "Ejecter"
+
+#: yncc_gtk_window.cpp:848
+msgid "One"
+msgstr "Un seul"
+
+#: yncc_gtk_window.cpp:851
+msgid "All"
+msgstr "Tout"
