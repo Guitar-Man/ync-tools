@@ -10,7 +10,7 @@
 yncc_gtk::Yncc_Gtk_Window::Yncc_Gtk_Window() {
     yncapi::Device::initialize();
     
-    builder = Gtk::Builder::create_from_file("../yncc-gtk/res/yncc-gtk.glade");
+    builder = Gtk::Builder::create_from_file("/usr/share/ync-tools/yncc-gtk/yncc-gtk.glade");
 
     loadWidgets();
     initWidgets();
