@@ -1027,7 +1027,7 @@ bool yncc_gtk::Yncc_Gtk_Window::saveDeviceList() {
 
     try {
         cfg.writeFile(CONFIG_FILE);
-    } catch(const FileIOException &fioex) {
+    } catch(const libconfig::FileIOException &fioex) {
         cerr << "I/O error while writing file: " << CONFIG_FILE << endl;
         return false;
     }
