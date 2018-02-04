@@ -9,7 +9,7 @@
 
 #define _YNCC_GTK_MAJOR_VERSION  0
 #define _YNCC_GTK_MINOR_VERSION  16
-#define _YNCC_GTK_PATCH_VERSION  3
+#define _YNCC_GTK_PATCH_VERSION  4
 #define _YNCC_GTK_PRE_RELEASE    ""
 
 static const unsigned int YNCC_GTK_MAJOR_VERSION = _YNCC_GTK_MAJOR_VERSION;
@@ -32,6 +32,9 @@ static const char*        YNCC_GTK_PRE_RELEASE   = _YNCC_GTK_PRE_RELEASE;
 
 #define REFRESH_FORCE               true
 #define NO_FORCE                    false
+
+#define CONFIG_FILE                 "~/.yncc-gtk.conf"
+#define GLADE_FILE                  "/usr/share/ync-tools/yncc-gtk/yncc-gtk.glade"
 
 namespace yncc_gtk {
     class Yncc_Gtk_Window {

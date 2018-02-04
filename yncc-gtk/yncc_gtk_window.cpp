@@ -9,13 +9,13 @@
 
 yncc_gtk::Yncc_Gtk_Window::Yncc_Gtk_Window() {
     yncapi::Device::initialize();
-    
-    builder = Gtk::Builder::create_from_file("/usr/share/ync-tools/yncc-gtk/yncc-gtk.glade");
+
+    builder = Gtk::Builder::create_from_file(GLADE_FILE);
 
     loadWidgets();
     initWidgets();
 
-    if (loadDeviceList()) {
+    if(loadDeviceList()) {
         refreshDeviceList();
         autoConnect();
     }
@@ -471,7 +471,7 @@ void yncc_gtk::Yncc_Gtk_Window::refreshListLine(int lineNum, std::string text, s
     //
     if(text != "<empty>") {
         trunc(text, TRUNC_SIZE_LIST);
-        
+
         opt_List_Labels[lineNum]->set_text(text);
         opt_List_Rows[lineNum]->set_activatable(true);
         opt_List_Rows[lineNum]->set_selectable(true);
@@ -570,7 +570,7 @@ void yncc_gtk::Yncc_Gtk_Window::refreshAny(int page, bool flagForceRefresh) {
             case PAGE_OPTIONS   :
                 refreshPageOptions(flagForceRefresh);
                 break;
-                
+
             case TITLE_BAR      :
                 refreshTitleBar();
                 break;
@@ -699,7 +699,7 @@ void yncc_gtk::Yncc_Gtk_Window::refreshPageServer(bool flagForceRefresh) {
 
                 trunc(artist);
                 trunc(album);
-            
+
                 label_ArtistServer->set_text(artist + " / " + album);
                 label_TitleServer->set_text(titlebarSong);
                 label_TimeElapsedServer->set_text(titlebarTime);
@@ -799,7 +799,7 @@ void yncc_gtk::Yncc_Gtk_Window::refreshPageOptions(bool flagForceRefresh) {
             text_NetworkName->set_text(yncapi::Device::NetworkInfo.NetworkName);
 
             for(unsigned int i = 0; i < 5; ++i)
-                if (!filterChanged[i])
+                if(!filterChanged[i])
                     filtersAddresses[i]->set_text(yncapi::Device::NetworkInfo.MACFilters[i]);
 
             if(yncapi::Device::NetworkInfo.MACFilterMode == "On") {
@@ -822,20 +822,20 @@ void yncc_gtk::Yncc_Gtk_Window::refreshPageOptions(bool flagForceRefresh) {
 
 void yncc_gtk::Yncc_Gtk_Window::refreshTitleBar() {
     yncapi::getPlayInfo();
-    
+
     if(yncapi::Device::PlayInfo.PlaybackInfo == "Play" || yncapi::Device::PlayInfo.PlaybackInfo == "Pause") {
-        if (button_Radio->get_active()) {
+        if(button_Radio->get_active()) {
             titlebarSong = noEmpty(yncapi::Device::PlayInfo.MetaInfo.Artist);
             titlebarTime.clear();
             trunc(titlebarSong);
             window->set_title(titlebarSong);
-        }
-        else if (button_Server->get_active() || button_CD->get_active()) {
-            titlebarSong = noEmpty(yncapi::Device::PlayInfo.MetaInfo.Song);
-            titlebarTime = convertPlayTime(yncapi::Device::PlayInfo.PlayTime);
-            trunc(titlebarSong);
-            window->set_title(titlebarTime + " - " + titlebarSong);
-        }
+        } else
+            if(button_Server->get_active() || button_CD->get_active()) {
+                titlebarSong = noEmpty(yncapi::Device::PlayInfo.MetaInfo.Song);
+                titlebarTime = convertPlayTime(yncapi::Device::PlayInfo.PlayTime);
+                trunc(titlebarSong);
+                window->set_title(titlebarTime + " - " + titlebarSong);
+            }
     } else {
         window->set_title("yncc-gtk");
         titlebarSong.clear();
@@ -869,7 +869,7 @@ void yncc_gtk::Yncc_Gtk_Window::button_MAC_AddFilter_clicked(std::string line) {
         filtersValidateButtons[stoi(line) - 1]->set_sensitive(false);
     } else
         filtersAddresses[stoi(line) - 1]->set_text(yncapi::Device::NetworkInfo.MACFilters[stoi(line) - 1]);
-        
+
     filterChanged[stoi(line) - 1] = false;
 }
 
@@ -906,15 +906,14 @@ void yncc_gtk::Yncc_Gtk_Window::button_AddThisComputer_clicked() {
 
 void yncc_gtk::Yncc_Gtk_Window::check_EnableMACFilter_clicked() {
     if(!check_EnableMACFilter->get_active())
-            yncapi::setMacFilterOn();
+        yncapi::setMacFilterOn();
 }
 
 void yncc_gtk::Yncc_Gtk_Window::entry_MACAddress_changed(unsigned int index) {
     if(filtersAddresses[index]->get_text() == yncapi::Device::NetworkInfo.MACFilters[index]) {
         filtersValidateButtons[index]->set_sensitive(false);
         filterChanged[index] = false;
-    }
-    else {
+    } else {
         filtersValidateButtons[index]->set_sensitive(true);
         filterChanged[index] = true;
     }
@@ -1011,7 +1010,7 @@ void yncc_gtk::Yncc_Gtk_Window::check_Remember_clicked(unsigned int index) {
     }
 }
 
-void yncc_gtk::Yncc_Gtk_Window::saveDeviceList() {
+bool yncc_gtk::Yncc_Gtk_Window::saveDeviceList() {
     libconfig::Config cfg;
     libconfig::Setting& root = cfg.getRoot();
     libconfig::Setting& devices = root.add("devices", libconfig::Setting::TypeList);
@@ -1026,16 +1025,23 @@ void yncc_gtk::Yncc_Gtk_Window::saveDeviceList() {
         }
     }
 
-    cfg.writeFile("yncc-gtk.cfg");
+    try {
+        cfg.writeFile(CONFIG_FILE);
+    } catch(const FileIOException &fioex) {
+        cerr << "I/O error while writing file: " << CONFIG_FILE << endl;
+        return false;
+    }
+    
+    return true;
 }
 
 bool yncc_gtk::Yncc_Gtk_Window::loadDeviceList() {
     libconfig::Config cfg;
 
     try {
-        cfg.readFile("yncc-gtk.cfg");
+        cfg.readFile(CONFIG_FILE);
     } catch(const libconfig::FileIOException &fioex) {
-        std::cerr << "I/O error while reading file." << std::endl;
+        std::cerr << "I/O error while reading file:" << CONFIG_FILE << std::endl;
         return(false);
     } catch(const libconfig::ParseException &pex) {
         std::cerr << "Parse error at " << pex.getFile() << ":" << pex.getLine()
@@ -1074,10 +1080,10 @@ void yncc_gtk::Yncc_Gtk_Window::refreshDeviceList() {
         deviceConnectButtons[i]->signal_clicked().connect(sigc::bind<std::string>(sigc::mem_fun(*this, &Yncc_Gtk_Window::connectDevice), deviceList.devices[i].DeviceIP));
         deviceRows[i]->show();
         deviceRememberCheckboxes[i]->set_active(deviceList.devices[i].Remember);
-        
-        if (deviceRememberCheckboxes[i]->get_active())
+
+        if(deviceRememberCheckboxes[i]->get_active())
             deviceAutoConnectCheckboxes[i]->set_sensitive();
-        
+
         deviceAutoConnectCheckboxes[i]->set_active(deviceList.devices[i].AutoConnect);
     }
 }
