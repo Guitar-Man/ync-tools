@@ -20,8 +20,6 @@ set(CONFIGURATION_NAME "Release")
 
 
 # Top project
-## Add the dependencies
-add_subdirectory(${CMAKE_SOURCE_DIR}/../yncapi ${CMAKE_CURRENT_BINARY_DIR}/yncapi-build)
 # Define some variables
 set(PROJECT_yncc_PATH "${CMAKE_CURRENT_LIST_DIR}")
 set(WORKSPACE_PATH "${CMAKE_CURRENT_LIST_DIR}/..")
@@ -82,6 +80,7 @@ endif(WIN32)
 add_executable(yncc ${RC_SRCS} ${CXX_SRCS} ${C_SRCS})
 target_link_libraries(yncc ${LINK_OPTIONS})
 
+<<<<<<< HEAD
 target_link_libraries(yncc
     yncapi
 )
@@ -89,6 +88,8 @@ target_link_libraries(yncc
 
 # Adding dependencies
 add_dependencies(yncc yncapi)
+=======
+>>>>>>> eb397c15d0c9dbd2581d75b2fec9fd63abde0137
 
 
 #{{{{ User Code 3
