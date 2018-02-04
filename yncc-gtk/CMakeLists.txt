@@ -9,19 +9,17 @@ project(yncc-gtk)
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 # Set default locations
-set(CL_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/../cmake-build-Debug/output)
+set(CL_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/../cmake-build-Release/output)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CL_OUTPUT_DIRECTORY})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CL_OUTPUT_DIRECTORY})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CL_OUTPUT_DIRECTORY})
 
-set(CONFIGURATION_NAME "Debug")
+set(CONFIGURATION_NAME "Release")
 
 # Projects
 
 
 # Top project
-## Add the dependencies
-add_subdirectory(${CMAKE_SOURCE_DIR}/../yncapi ${CMAKE_CURRENT_BINARY_DIR}/yncapi-build)
 # Define some variables
 set(PROJECT_yncc-gtk_PATH "${CMAKE_CURRENT_LIST_DIR}")
 set(WORKSPACE_PATH "${CMAKE_CURRENT_LIST_DIR}/..")
@@ -47,10 +45,12 @@ execute_process(COMMAND
     OUTPUT_STRIP_TRAILING_WHITESPACE)
 string(STRIP ${CL_TMP_VAR} CL_VAR_1)
 add_definitions(${CL_VAR_1})
-add_definitions(-pg)
-add_definitions(-g)
-add_definitions(-O0)
+add_definitions(-O2)
 add_definitions(-Wall)
+add_definitions(
+    -DNDEBUG
+)
+
 
 # Linker options
 execute_process(COMMAND 
@@ -60,8 +60,6 @@ execute_process(COMMAND
     OUTPUT_STRIP_TRAILING_WHITESPACE)
 string(STRIP ${CL_TMP_VAR} CL_VAR_2)
 set(LINK_OPTIONS ${CL_VAR_2})
-set(LINK_OPTIONS ${LINK_OPTIONS} -pg)
-set(LINK_OPTIONS ${LINK_OPTIONS} -no-pie)
 
 
 if(WIN32)
@@ -69,7 +67,7 @@ if(WIN32)
 endif(WIN32)
 
 # Library path
-set(CMAKE_LDFLAGS "${CMAKE_LDFLAGS} -L. -L$(IntermediateDirectory) ")
+set(CMAKE_LDFLAGS "${CMAKE_LDFLAGS} -L. ")
 
 # Define the CXX sources
 set ( CXX_SRCS
@@ -81,7 +79,7 @@ set ( CXX_SRCS
 
 set_source_files_properties(
     ${CXX_SRCS} PROPERTIES COMPILE_FLAGS 
-    " -pg -g -O0 -Wall -pthread")
+    " -O2 -Wall -pthread")
 
 if(WIN32)
     enable_language(RC)
@@ -98,17 +96,6 @@ endif(WIN32)
 add_executable(yncc-gtk ${RC_SRCS} ${CXX_SRCS} ${C_SRCS})
 target_link_libraries(yncc-gtk ${LINK_OPTIONS})
 
-target_link_libraries(yncc-gtk
-    sfml-system
-    sfml-network
-    tinyxml2
-    yncapi
-    config++
-)
-
-
-# Adding dependencies
-add_dependencies(yncc-gtk yncapi)
 
 
 #{{{{ User Code 3

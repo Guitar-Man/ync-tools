@@ -9,19 +9,17 @@ project(yncc)
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 # Set default locations
-set(CL_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/../cmake-build-Debug/output)
+set(CL_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/../cmake-build-Release/output)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CL_OUTPUT_DIRECTORY})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CL_OUTPUT_DIRECTORY})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CL_OUTPUT_DIRECTORY})
 
-set(CONFIGURATION_NAME "Debug")
+set(CONFIGURATION_NAME "Release")
 
 # Projects
 
 
 # Top project
-## Add the dependencies
-add_subdirectory(${CMAKE_SOURCE_DIR}/../yncapi ${CMAKE_CURRENT_BINARY_DIR}/yncapi-build)
 # Define some variables
 set(PROJECT_yncc_PATH "${CMAKE_CURRENT_LIST_DIR}")
 set(WORKSPACE_PATH "${CMAKE_CURRENT_LIST_DIR}/..")
@@ -40,9 +38,12 @@ include_directories(
 
 
 # Compiler options
-add_definitions(-g)
-add_definitions(-O0)
+add_definitions(-O2)
 add_definitions(-Wall)
+add_definitions(
+    -DNDEBUG
+)
+
 
 # Linker options
 
@@ -52,7 +53,7 @@ if(WIN32)
 endif(WIN32)
 
 # Library path
-set(CMAKE_LDFLAGS "${CMAKE_LDFLAGS} -L. -L$(IntermediateDirectory) ")
+set(CMAKE_LDFLAGS "${CMAKE_LDFLAGS} -L. ")
 
 # Define the CXX sources
 set ( CXX_SRCS
@@ -62,7 +63,7 @@ set ( CXX_SRCS
 
 set_source_files_properties(
     ${CXX_SRCS} PROPERTIES COMPILE_FLAGS 
-    " -g -O0 -Wall")
+    " -O2 -Wall")
 
 if(WIN32)
     enable_language(RC)
@@ -79,16 +80,6 @@ endif(WIN32)
 add_executable(yncc ${RC_SRCS} ${CXX_SRCS} ${C_SRCS})
 target_link_libraries(yncc ${LINK_OPTIONS})
 
-target_link_libraries(yncc
-    sfml-system
-    sfml-network
-    tinyxml2
-    yncapi
-)
-
-
-# Adding dependencies
-add_dependencies(yncc yncapi)
 
 
 #{{{{ User Code 3
