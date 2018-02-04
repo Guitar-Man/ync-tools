@@ -231,7 +231,7 @@ namespace yncc_gtk {
             bool isConnected();
             void autoConnect();
             bool loadDeviceList();
-            void saveDeviceList();
+            bool saveDeviceList();
             std::vector<bool> filterChanged;
 
             // --- Refresh methods ---------
