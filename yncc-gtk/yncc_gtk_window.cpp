@@ -1026,7 +1026,8 @@ bool yncc_gtk::Yncc_Gtk_Window::saveDeviceList() {
     }
 
     try {
-        cfg.writeFile(CONFIG_FILE);
+        std::string config = getenv("HOME") + std::string(CONFIG_FILE);
+        cfg.writeFile(config.c_str());
     } catch(const libconfig::FileIOException &fioex) {
         cerr << "I/O error while writing file: " << CONFIG_FILE << endl;
         return false;
@@ -1039,7 +1040,8 @@ bool yncc_gtk::Yncc_Gtk_Window::loadDeviceList() {
     libconfig::Config cfg;
 
     try {
-        cfg.readFile(CONFIG_FILE);
+        std::string config = getenv("HOME") + std::string(CONFIG_FILE);
+        cfg.readFile(config.c_str());
     } catch(const libconfig::FileIOException &fioex) {
         std::cerr << "I/O error while reading file:" << CONFIG_FILE << std::endl;
         return(false);
