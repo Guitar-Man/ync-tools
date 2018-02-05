@@ -2574,7 +2574,7 @@ Copyright (C) 2018 - Alexandre Courtois</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
-                            <property name="uri">https://github.com/Guitar-Man/yncc-all</property>
+                            <property name="uri">https://github.com/Guitar-Man/ync-tools</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
