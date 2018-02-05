@@ -1,7 +1,7 @@
 # Maintainer: Alexandre Courtois <lasalade.verte@free.fr>
 
 pkgname=ync-tools
-pkgver=0.79.5
+pkgver=0.79.6
 pkgrel=1
 pkgdesc="Yamaha network players control tools"
 arch=('any')

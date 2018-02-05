@@ -188,6 +188,7 @@ void yncc_gtk::Yncc_Gtk_Window::loadOptionPanel() {
     builder->get_widget("label_vYnccGtk",       label_vYnccGtk);
     builder->get_widget("label_vYncapi",        label_vYncapi);
     builder->get_widget("button_WebPage",       button_WepPage);
+    builder->get_widget("button_Licence",       button_Licence);
     builder->get_widget("text_NetworkName",     text_NetworkName);
     builder->get_widget("button_NetworkName",   button_NetworkName);
     builder->get_widget("check_EnableMacFilter", check_EnableMACFilter);
@@ -226,7 +227,8 @@ void yncc_gtk::Yncc_Gtk_Window::loadOptionPanel() {
     }
 
     refreshVersion();                               // refresh version numbers once here
-    button_WepPage->set_label("Page Web");          // unable to set label with Glade (?)
+    button_WepPage->set_label("GitHub");            // unable to set label with Glade (?)
+    button_Licence->set_label("Licence");
 }
 
 void yncc_gtk::Yncc_Gtk_Window::loadWidgets() {

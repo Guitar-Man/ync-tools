@@ -2554,11 +2554,13 @@ Copyright (C) 2018 - Alexandre Courtois</property>
                         <property name="can_focus">False</property>
                         <property name="homogeneous">True</property>
                         <child>
-                          <object class="GtkButton">
-                            <property name="label" translatable="yes">Licence</property>
+                          <object class="GtkLinkButton" id="button_Licence">
+                            <property name="label" translatable="yes">button</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <property name="uri">https://www.gnu.org/licenses/gpl-3.0.txt</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>

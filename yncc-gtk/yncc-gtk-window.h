@@ -9,7 +9,7 @@
 
 #define _YNCC_GTK_MAJOR_VERSION  0
 #define _YNCC_GTK_MINOR_VERSION  16
-#define _YNCC_GTK_PATCH_VERSION  5
+#define _YNCC_GTK_PATCH_VERSION  6
 #define _YNCC_GTK_PRE_RELEASE    ""
 
 static const unsigned int YNCC_GTK_MAJOR_VERSION = _YNCC_GTK_MAJOR_VERSION;
@@ -126,6 +126,7 @@ namespace yncc_gtk {
             Gtk::Label* label_vYnccGtk;
             Gtk::Label* label_vYncapi;
             Gtk::LinkButton* button_WepPage;
+            Gtk::LinkButton* button_Licence;
             Gtk::Entry* text_NetworkName;
             Gtk::Button* button_NetworkName;
             Gtk::CheckButton* check_EnableMACFilter;
