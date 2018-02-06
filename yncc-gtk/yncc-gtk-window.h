@@ -8,8 +8,8 @@
 #include "../yncapi/yncapi.h"
 
 #define _YNCC_GTK_MAJOR_VERSION  0
-#define _YNCC_GTK_MINOR_VERSION  16
-#define _YNCC_GTK_PATCH_VERSION  7
+#define _YNCC_GTK_MINOR_VERSION  17
+#define _YNCC_GTK_PATCH_VERSION  0
 #define _YNCC_GTK_PRE_RELEASE    ""
 
 static const unsigned int YNCC_GTK_MAJOR_VERSION = _YNCC_GTK_MAJOR_VERSION;

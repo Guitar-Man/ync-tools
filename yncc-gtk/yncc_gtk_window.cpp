@@ -682,6 +682,19 @@ void yncc_gtk::Yncc_Gtk_Window::refreshPageList(bool flagForceRefresh) {
         // Then we can retrieve the whole list and proceed the refresh
         //
         yncapi::getListInfo();
+        
+        bool done;
+        
+        for(unsigned int i = 0, done = false; i < yncapi::Device::ListInfo.CurrentList.size() && !done; ++i) {
+            if (yncapi::Device::ListInfo.CurrentList[0].Attr != "Container") {
+                if (yncapi::Device::ListInfo.CurrentList[i].Text == yncapi::Device::PlayInfo.MetaInfo.Song) {
+                    list_CurrentList->unselect_row();
+                    list_CurrentList->select_row(*opt_List_Rows[i]);
+                    done = true;
+                }
+            } else
+                done = true;
+        }
 
         if(listRefreshDetected() || flagForceRefresh) {
             refreshList();
