@@ -685,10 +685,11 @@ void yncc_gtk::Yncc_Gtk_Window::refreshPageList(bool flagForceRefresh) {
         
         bool done;
         
+        list_CurrentList->unselect_row();
+        
         for(unsigned int i = 0, done = false; i < yncapi::Device::ListInfo.CurrentList.size() && !done; ++i) {
             if (yncapi::Device::ListInfo.CurrentList[0].Attr != "Container") {
                 if (yncapi::Device::ListInfo.CurrentList[i].Text == yncapi::Device::PlayInfo.MetaInfo.Song) {
-                    list_CurrentList->unselect_row();
                     list_CurrentList->select_row(*opt_List_Rows[i]);
                     done = true;
                 }
@@ -852,7 +853,7 @@ void yncc_gtk::Yncc_Gtk_Window::refreshTitleBar() {
                 window->set_title(titlebarTime + " - " + titlebarSong);
             }
     } else {
-        window->set_title("yncc-gtk");
+        window->set_title("Yncc");
         titlebarSong.clear();
         titlebarTime.clear();
     }
