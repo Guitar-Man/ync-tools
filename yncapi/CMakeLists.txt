@@ -55,7 +55,8 @@ endif(WIN32)
 # Place your code here
 #}}}}
 
-add_library(yncapi ${RC_SRCS} ${CXX_SRCS} ${C_SRCS})
+add_library(yncapi SHARED ${RC_SRCS} ${CXX_SRCS} ${C_SRCS})
+target_link_libraries(yncapi ${LINK_OPTIONS})
 
 target_link_libraries(yncapi
     sfml-system
