@@ -28,7 +28,8 @@ namespace yncapi {
 
     // ------ DEVICE STATIC INIT -----------------
 
-    string Device::id = DEFAULT_DEVICE;
+    //string Device::id = DEFAULT_DEVICE;
+    TDeviceId Device::id;
     TSystemConfig Device::SystemConfig;
     TSystemPowerControl Device::SystemPowerControl;
     TSystemBasicStatus Device::SystemBasicStatus;
@@ -49,7 +50,7 @@ namespace yncapi {
     bool DeviceRefreshNotifications::OptionInfo = true;
 
     bool Device::isAssigned() {
-        return Device::id != DEFAULT_DEVICE;
+        return Device::id.DeviceIP.size();
     }
 
     void Device::initialize() {
@@ -64,20 +65,20 @@ namespace yncapi {
         getPlayInfo();
     }
 
-    bool deviceProbe(const string &hostName) {
-        TcpSocket socket;
+    bool deviceProbe(const TDeviceId& id) {
+        sf::TcpSocket socket;
 
-        if(socket.connect(hostName, 80) == Socket::Status::Done) {
+        if(socket.connect(id.DeviceIP, 80) == sf::Socket::Status::Done) {
             return SUCCESS;
         }
 
         return FAILURE;
     }
 
-    bool deviceAssign(const string &hostName) {
-        if(deviceProbe(hostName)) {
-            Device::id = hostName;
-            httpClient.setHost(Device::id);
+    bool deviceAssign(const TDeviceList& list, unsigned int pos) {
+        if(deviceProbe(list.devices[pos])) {
+            Device::id = list.devices[pos];
+            httpClient.setHost(Device::id.DeviceIP);
 
             return SUCCESS;
         }
@@ -86,7 +87,10 @@ namespace yncapi {
     }
 
     string deviceInfo() {
-        return Device::id;
+        if (Device::isAssigned())
+            return Device::id.DeviceName + ":" + Device::id.DeviceIP  + Device::id.CtrlURL;
+        
+        return string();
     }
 
     string request(string type, const string& path, const string& value) {
@@ -404,10 +408,12 @@ namespace yncapi {
 
         selector.add(socket);
         
+        // automatically delete the members who are not checked with "Remeber" tag
         for(unsigned int i = 0; i < deviceList.devices.size(); ++i)
             if (!deviceList.devices[i].Remember)
                 deviceList.devices.erase(deviceList.devices.begin() + i);
 
+        // only look for to fill free space on the device list (typically 7 minus saved devices)
         for(unsigned int i = 0; i < maxDevices - deviceList.devices.size(); ++i) {
             if(selector.wait(sf::seconds(timeout))) {
                 socketStatus = socket.receive(pssdp, senderIP, senderPort);
@@ -415,19 +421,24 @@ namespace yncapi {
                 if(socketStatus == sf::Socket::Done) {
                     Url url(pssdp.getField("location"));
                     
-                    sf::Http httpClient(url.host(), stoi(url.port()));
+                    // prepare the http client to receive the xml desc file
+                    sf::Http l_httpClient(url.host(), stoi(url.port()));
                     sf::Http::Request httpRequest(url.path());
-                    sf::Http::Response response = httpClient.sendRequest(httpRequest);
+                    sf::Http::Response response = l_httpClient.sendRequest(httpRequest);
 
                     std::string xmlDesc = response.getBody();
-
+    
+                    // try to get the control URL (where to send future XML requests)
                     std::string controlURL = xmlExtract(xmlDesc, "root/yamaha:X_device/yamaha:X_serviceList/yamaha:X_service/yamaha:X_controlURL");
 
+                    // if unable to get, then it is not a Yamaha device, ignore it
+                    // else extract the device id, and add it to the list if not already in
                     if(controlURL.find(ERROR_XML_) >= controlURL.size()) {
                         std::string modelName = xmlExtract(xmlDesc, "root/device/modelName");
                         TDeviceId id;
                         id.DeviceName = modelName;
                         id.DeviceIP = url.host();
+                        id.CtrlURL = controlURL;
 
                         if (!deviceList.exist(id))
                             deviceList.devices.push_back(id);

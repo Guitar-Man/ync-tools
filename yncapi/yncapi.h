@@ -5,7 +5,7 @@
 #include <string>
 
 #define _YNCAPI_MAJOR_VERSION  0
-#define _YNCAPI_MINOR_VERSION  40
+#define _YNCAPI_MINOR_VERSION  41
 #define _YNCAPI_PATCH_VERSION  1
 #define _YNCAPI_PRE_RELEASE    ""
 
@@ -18,9 +18,9 @@ static const char*        YNCAPI_PRE_RELEASE   = _YNCAPI_PRE_RELEASE;
 
 namespace yncapi
 {
-    bool        deviceAssign(const std::string& hostName);
+    bool        deviceAssign(const TDeviceList& list, unsigned int pos);
     std::string deviceInfo();
-    bool        deviceProbe(const std::string& hostName);
+    bool        deviceProbe(const TDeviceId& id);
     void        deviceRemove();
 
     TReturnCode discover(TDeviceList& deviceList, unsigned int maxDevices = 7, unsigned int timeout = 1);

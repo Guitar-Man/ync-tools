@@ -60,6 +60,8 @@
 
 static bool CMD_REQUEST_already_called = false;
 
+yncapi::TDeviceList list;
+
 void yncc::handle(yncapi::TReturnCode code) {
     if(code)
         cout << "Error (code " << std::to_string(code) << ")" << endl;
@@ -90,14 +92,17 @@ bool yncc::parseCmdLine(const std::string &cmdline) {
             switch(args.size()) {
                 case _1_ARGS:
                     IF_CMDARGS1P_IS(CMD_INFO) {
-                        cout << "Current device : " << yncapi::deviceInfo() << endl;
+                        if (yncapi::Device::isAssigned())
+                            cout << "Current device : " << yncapi::deviceInfo() << endl;
+                        else
+                            cout << "No device assigned !" << endl;
+                            
                         return CONTINUE;
                     }
 
                     IF_CMDARGS1P_IS(CMD_DISCOVER) {
                         cout << "Searching devices..." << endl;
 
-                        yncapi::TDeviceList list;
                         yncapi::discover(list);
 
                         if(list.devices.size())
@@ -112,27 +117,31 @@ bool yncc::parseCmdLine(const std::string &cmdline) {
 
                 case _2_ARGS:
                     IF_CMDARGS1P_IS(CMD_ASSIGN) {
-                        cout << "Setting device " << args[1] << "... ";
-                        cout.flush();
+                        if (stoi(args[1]) < list.devices.size()) {
+                            cout << "Setting device " << list.devices[stoi(args[1])].DeviceName << "... ";
+                            cout.flush();
 
-                        if(yncapi::deviceAssign(args[1]))
-                            cout << "OK" << endl;
-                        else
-                            cout << "KO" << endl;
+                            if(yncapi::deviceAssign(list, stoi(args[1])))
+                                cout << "OK" << endl;
+                            else
+                                cout << "KO" << endl;
 
-                        return CONTINUE;
+                            return CONTINUE;
+                        }
                     }
 
                     IF_CMDARGS1P_IS(CMD_PROBE) {
-                        cout << "Probing device " << args[1] << "... ";
-                        cout.flush();
+                        if (stoi(args[1]) < list.devices.size()) {
+                            cout << "Probing device " << list.devices[stoi(args[1])].DeviceName << "... ";
+                            cout.flush();
 
-                        if(yncapi::deviceProbe(args[1]))
-                            cout << "OK" << endl;
-                        else
-                            cout << "KO" << endl;
+                            if(yncapi::deviceProbe(list.devices[stoi(args[1])]))
+                                cout << "OK" << endl;
+                            else
+                                cout << "KO" << endl;
 
-                        return CONTINUE;
+                            return CONTINUE;
+                        }
                     }
 
                     break;
