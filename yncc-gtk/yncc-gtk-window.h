@@ -8,8 +8,8 @@
 #include "../yncapi/yncapi.h"
 
 #define _YNCC_GTK_MAJOR_VERSION  0
-#define _YNCC_GTK_MINOR_VERSION  17
-#define _YNCC_GTK_PATCH_VERSION  1
+#define _YNCC_GTK_MINOR_VERSION  18
+#define _YNCC_GTK_PATCH_VERSION  0
 #define _YNCC_GTK_PRE_RELEASE    ""
 
 static const unsigned int YNCC_GTK_MAJOR_VERSION = _YNCC_GTK_MAJOR_VERSION;
@@ -228,7 +228,7 @@ namespace yncc_gtk {
             bool isValidMACAddress(const std::string& address);
             bool connected = false;
             yncapi::TDeviceList deviceList;
-            void connectDevice(const std::string& host);
+            void connectDevice(unsigned int pos);
             bool isConnected();
             void autoConnect();
             bool loadDeviceList();
