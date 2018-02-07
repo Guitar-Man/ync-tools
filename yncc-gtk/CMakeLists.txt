@@ -74,9 +74,8 @@ set(CMAKE_LDFLAGS "${CMAKE_LDFLAGS} -L. ")
 # Define the CXX sources
 set ( CXX_SRCS
     ${CMAKE_CURRENT_LIST_DIR}/main.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/yncc_gtk_window.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../yncc/yncc.cpp
     ${CMAKE_CURRENT_LIST_DIR}/MACAddressUtility.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/yncc-gtk-window.cpp
 )
 
 set_source_files_properties(

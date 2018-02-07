@@ -5,8 +5,8 @@
 #include <string>
 
 #define _YNCC_MAJOR_VERSION  0
-#define _YNCC_MINOR_VERSION  23
-#define _YNCC_PATCH_VERSION  0
+#define _YNCC_MINOR_VERSION  24
+#define _YNCC_PATCH_VERSION  1
 #define _YNCC_PRE_RELEASE    ""
 
 static const unsigned int YNCC_MAJOR_VERSION = _YNCC_MAJOR_VERSION;

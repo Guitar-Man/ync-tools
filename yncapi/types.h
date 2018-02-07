@@ -103,6 +103,7 @@ namespace yncapi {
     typedef struct {
         string DeviceName;
         string DeviceIP;
+        string CtrlURL;
         bool Remember = false;
         bool AutoConnect = false;
     } TDeviceId;
@@ -112,7 +113,7 @@ namespace yncapi {
         
         void show() {
             for(unsigned int i = 0; i < devices.size(); ++i)
-                std::cout << devices[i].DeviceName << ":" << devices[i].DeviceIP << std::endl;
+                std::cout << i << " - " << devices[i].DeviceName << ":" << devices[i].DeviceIP << std::endl;
         }
         
         bool exist(TDeviceId device) {
@@ -125,7 +126,8 @@ namespace yncapi {
     } TDeviceList;
 
     struct Device {
-        static string id;        
+        //static string id;
+        static TDeviceId id;
         static bool isAssigned();
         static void initialize();
         static void update();

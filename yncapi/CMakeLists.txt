@@ -37,6 +37,10 @@ set(CMAKE_LDFLAGS "${CMAKE_LDFLAGS} -L. ")
 set ( CXX_SRCS
     ${CMAKE_CURRENT_LIST_DIR}/yncapi.cpp
     ${CMAKE_CURRENT_LIST_DIR}/url.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/http_features.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/ssdp_features.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/tools.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/xml_features.cpp
 )
 
 if(WIN32)

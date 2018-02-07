@@ -3,7 +3,7 @@
 
 sf::Http yncapi::httpClient;
 
-string yncapi::sendRequest(const string &body) {
+string yncapi::sendRequest(const string &body) {    
     if(Device::isAssigned() && deviceProbe(Device::id)) {
         sf::Http::Request request;
         sf::Http::Response response;
