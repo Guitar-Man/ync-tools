@@ -16,8 +16,6 @@ using namespace std;
 #define SUCCESS         true
 #define FAILURE         false
 
-#define DEFAULT_DEVICE                  "no device"
-
 namespace yncapi {
     string __Xml_BasicStatus__;
     string __Xml_PlayInfo__;
@@ -28,7 +26,6 @@ namespace yncapi {
 
     // ------ DEVICE STATIC INIT -----------------
 
-    //string Device::id = DEFAULT_DEVICE;
     TDeviceId Device::id;
     TSystemConfig Device::SystemConfig;
     TSystemPowerControl Device::SystemPowerControl;
@@ -109,7 +106,7 @@ namespace yncapi {
         return stoi(xmlGetAttribute(response, XML_ROOTNODE, XML_ERR_ATTR));
     }
 
-    TSystemConfig getSystemConfig() {
+    const TSystemConfig& getSystemConfig() {
         string xml_0 = sendRequest(xmlBuildRequest(HTTP_GET, SYSTEM_CONFIG));
 
         Device::SystemConfig.ModelName         = xmlExtract(xml_0, YAMAHA_AV + SYSTEM_CONFIG + "/Model_Name");
@@ -120,7 +117,7 @@ namespace yncapi {
         return Device::SystemConfig;
     }
 
-    TSystemPowerControl getSystemPower() {
+    const TSystemPowerControl& getSystemPower() {
         string xml_0 = sendRequest(xmlBuildRequest(HTTP_GET, SYSTEM_POWERCONTROL_POWER));
 
         Device::SystemPowerControl.Power = xmlExtract(xml_0, YAMAHA_AV + SYSTEM_POWERCONTROL_POWER);
@@ -128,7 +125,7 @@ namespace yncapi {
         return Device::SystemPowerControl;
     }
 
-    TSystemPowerControl getSystemPowerSaving() {
+    const TSystemPowerControl& getSystemPowerSaving() {
         string xml_0 = sendRequest(xmlBuildRequest(HTTP_GET, SYSTEM_POWERCONTROL_SAVING));
 
         Device::SystemPowerControl.Saving = xmlExtract(xml_0, YAMAHA_AV + SYSTEM_POWERCONTROL_SAVING);
@@ -136,7 +133,7 @@ namespace yncapi {
         return Device::SystemPowerControl;
     }
 
-    TSystemBasicStatus getBasicStatus() {
+    const TSystemBasicStatus& getBasicStatus() {
         string xml_0 = sendRequest(xmlBuildRequest(HTTP_GET, SYSTEM_BASIC_STATUS));
 
         if(xml_0 != __Xml_BasicStatus__) {
@@ -151,7 +148,7 @@ namespace yncapi {
         return Device::SystemBasicStatus;
     }
 
-    TSystemInput getSystemInput() {
+    const TSystemInput& getSystemInput() {
         string xml_0 = sendRequest(xmlBuildRequest(HTTP_GET, SYSTEM_INPUT_INPUTSEL));
 
         Device::SystemInput.InputSel = xmlExtract(xml_0, YAMAHA_AV + SYSTEM_INPUT_INPUTSEL);
@@ -159,7 +156,7 @@ namespace yncapi {
         return Device::SystemInput;
     }
 
-    TSystemSound getSystemSound() {
+    const TSystemSound& getSystemSound() {
         string xml_0 = sendRequest(xmlBuildRequest(HTTP_GET, SYSTEM_SOUND));
 
         Device::SystemSound.PureDirectMode = xmlExtract(xml_0, YAMAHA_AV + SYSTEM_SOUND_PUREDIRECT_MODE);
@@ -167,7 +164,7 @@ namespace yncapi {
         return Device::SystemSound;
     }
 
-    TPlayerConfig getPlayerConfig() {
+    const TPlayerConfig& getPlayerConfig() {
         string xml_0 = sendRequest(xmlBuildRequest(HTTP_GET, PLAYER_CONFIG));
 
         Device::PlayerConfig.FeatureAvailability = xmlExtract(xml_0, YAMAHA_AV + PLAYER_CONFIG + "/Feature_Availability");
@@ -175,7 +172,7 @@ namespace yncapi {
         return Device::PlayerConfig;
     }
 
-    TListInfo getListInfo(bool noList) {
+    const TListInfo& getListInfo(bool noList) {
         string xml_0 = sendRequest(xmlBuildRequest(HTTP_GET, PLAYER_LIST_INFO));
 
         if(xml_0 != __Xml_ListInfo__ || __noList_on_last_call__) {
@@ -192,6 +189,8 @@ namespace yncapi {
             Device::ListInfo.CurrentList.clear();
             __noList_on_last_call__ = false;
 
+            // avoid to fully generate list if not necessary
+            // eg. to only read menu status
             if(!noList) {
                 string text;
 
@@ -214,7 +213,7 @@ namespace yncapi {
         return Device::ListInfo;
     }
 
-    TPlayInfo getPlayInfo() {
+    const TPlayInfo& getPlayInfo() {
         string xml_0 = sendRequest(xmlBuildRequest(HTTP_GET, PLAYER_PLAY_INFO));
 
         if(xml_0 != __Xml_PlayInfo__) {
@@ -248,7 +247,7 @@ namespace yncapi {
         return Device::PlayInfo;
     }
 
-    TNetworkInfo getNetworkInfo() {
+    const TNetworkInfo& getNetworkInfo() {
         string xml_0 = sendRequest(xmlBuildRequest(HTTP_GET, SYSTEM_MISC_NETWORK_NAME));
         string xml_1 = sendRequest(xmlBuildRequest(HTTP_GET, SYSTEM_MISC_MACFILTER));
         string xml_2 = sendRequest(xmlBuildRequest(HTTP_GET, SYSTEM_MISC_NETWORK_INFO));
