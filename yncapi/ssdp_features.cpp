@@ -96,14 +96,18 @@ void yncapi::PacketSSDP::parseFields(std::istream &in) {
 }
 
 const std::string& yncapi::PacketSSDP::getField(const std::string& field) {
+    // on the first call only, retrieve the packet data
     if(firstGet) {
         firstGet = false;
         std::string data((char*)(this->getData()));
         parse(data);
     }
 
+    // then try to find the field name
     TFieldTable::const_iterator it = m_fields.find(toLower(field));
 
+    // field found ? return value
+    // field not found ? return empty string
     if(it != m_fields.end()) {
         return it->second;
     } else {

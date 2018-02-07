@@ -20,27 +20,29 @@ namespace yncapi {
             bool firstGet = true;
 
             /**
-             * @brief 
-             * @param str
+             * @brief Lower characters of the parameter string
+             * @param str String to lower
+             * @return Lowered string
              */
             std::string toLower(std::string str) const;
             
             /**
-             * @brief 
-             * @param data
+             * @brief Parse SSDP packet, like HTTP packet
+             * @param data SSDP packet data
              */
             void parse(const std::string& data);
             
             /**
-             * @brief 
-             * @param in
+             * @brief Parse a field and push it to the field table if valid
+             * @param in Field to parse
              */
             void parseFields(std::istream &in);
 
         public:
             /**
-             * @brief 
-             * @param field
+             * @brief Get a field value by its field name
+             * @param field Field name
+             * @return Field value
              */
             const std::string& getField(const std::string& field);
 

@@ -17,6 +17,7 @@ namespace yncapi {
     /**
      * @brief Send request to httpClient
      * @param body Request body
+     * @return Either a string containing the HTTP response body, or an error code such as code 400
      */
     string sendRequest(const string &body);
 }
