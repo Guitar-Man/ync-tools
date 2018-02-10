@@ -1,3 +1,8 @@
+/*
+ * Code from : https://wxwidgets.info/cross-platform-way-of-obtaining-mac-address-of-your-machine/
+ * 
+ */
+
 #ifndef _MACADDRESS_UTILITY_H
 #define _MACADDRESS_UTILITY_H
 
