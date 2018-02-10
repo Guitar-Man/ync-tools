@@ -63,7 +63,7 @@ namespace yncapi
     TReturnCode setMacFilterOn();
     TReturnCode setMacFilterAddress(string line, string address);
 
-    string request(string type, const string& path, const string& value = "GetParam");
+    string request(string& type, const string& path, const string& value = "GetParam");
 }
 
 #endif

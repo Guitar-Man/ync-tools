@@ -9,7 +9,7 @@
 
 #define _YNCC_GTK_MAJOR_VERSION  0
 #define _YNCC_GTK_MINOR_VERSION  18
-#define _YNCC_GTK_PATCH_VERSION  0
+#define _YNCC_GTK_PATCH_VERSION  1
 #define _YNCC_GTK_PRE_RELEASE    ""
 
 static const unsigned int YNCC_GTK_MAJOR_VERSION = _YNCC_GTK_MAJOR_VERSION;
@@ -28,7 +28,7 @@ static const char*        YNCC_GTK_PRE_RELEASE   = _YNCC_GTK_PRE_RELEASE;
 
 #define REFRESH_INTERVAL            1000
 #define TRUNC_SIZE                  25
-#define TRUNC_SIZE_LIST             50
+#define TRUNC_SIZE_LIST             62
 
 #define REFRESH_FORCE               true
 #define NO_FORCE                    false

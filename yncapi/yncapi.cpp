@@ -90,7 +90,7 @@ namespace yncapi {
         return string();
     }
 
-    string request(string type, const string& path, const string& value) {
+    string request(string& type, const string& path, const string& value) {
         if(type == "put")
             type = HTTP_PUT;
         else

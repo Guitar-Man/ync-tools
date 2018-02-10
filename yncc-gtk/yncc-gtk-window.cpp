@@ -689,7 +689,7 @@ void yncc_gtk::Yncc_Gtk_Window::refreshPageList(bool flagForceRefresh) {
         
         for(unsigned int i = 0, done = false; i < yncapi::Device::ListInfo.CurrentList.size() && !done; ++i) {
             if (yncapi::Device::ListInfo.CurrentList[0].Attr != "Container") {
-                if (yncapi::Device::ListInfo.CurrentList[i].Text == yncapi::Device::PlayInfo.MetaInfo.Song) {
+                if (yncapi::Device::PlayInfo.MetaInfo.Song.compare(0, TRUNC_SIZE_LIST, yncapi::Device::ListInfo.CurrentList[i].Text, 0, TRUNC_SIZE_LIST) == 0) {
                     list_CurrentList->select_row(*opt_List_Rows[i]);
                     done = true;
                 }

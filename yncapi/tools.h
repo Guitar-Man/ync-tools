@@ -13,7 +13,7 @@ namespace yncapi {
      * @param c Separator
      * @return Vector of substrings
      */
-    const vector<string> slice(const string& s, const char& c);    
+    const vector<string> slice(const string& s, char c);    
     
     /**
      * @brief Replace the "toFind" string in "src" string by the "replaceBy" string each time it's necessary

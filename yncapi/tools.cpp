@@ -1,6 +1,6 @@
 #include "tools.h"
 
-const vector<string> yncapi::slice(const string& s, const char& c) {
+const vector<string> yncapi::slice(const string& s, char c) {
     string buff{""};
     vector<string> v;
 
