@@ -425,7 +425,7 @@ void yncc_gtk::Yncc_Gtk_Window::button_Repeat_clicked() {
 
 void yncc_gtk::Yncc_Gtk_Window::button_Listen_pressed() {
     if(button_Listen->get_active())
-        yncapi::setPlayerCtrlPlay();
+        yncapi::setPlayerCtrlStop();
 }
 
 void yncc_gtk::Yncc_Gtk_Window::button_ListGoBack_clicked() {
